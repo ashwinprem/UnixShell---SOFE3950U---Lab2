@@ -3,7 +3,7 @@
 void execute_command(char *input)
 {
   char *token;
-  char *delim = "\n";
+  char *delim = " \n";
   token = strtok (input, delim);
 
   if (token != NULL) 
@@ -13,7 +13,7 @@ void execute_command(char *input)
       token = strtok(NULL, delim); // Get next part (directory path)
       change_directory(token);
     } else {
-      printf("Command not recognized.\n");
+      system("pwd");
     }
   }
 }
