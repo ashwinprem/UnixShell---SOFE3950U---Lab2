@@ -1,17 +1,19 @@
 #include "myshell.h"
 
-//Takes a single argument, input, which is a pointer to a character array (string). This function is responsible for parsing the input command and executing it accordingly.
+// Takes a single argument, input, which is a pointer to a character array (string). This function is responsible for parsing the input command and executing it accordingly.
 void execute_command(char *input) {
     char *token;
     char *delim = " \n";
     token = strtok(input, delim);
 
-    /* The first token is checked to see if it's a recognized command, then it attempts to get the next token, (directory path), 
-    and calls change_directory to change the current working directory. Prints error otherwise. */
+    // First token checks to see if it's a recognized command.
     if (token != NULL) {
+        // Attempts to get the next token (directory path). Calls change_directory to change the current working directory.
         if (strcmp(token, "cd") == 0) {
             token = strtok(NULL, delim);
             change_directory(token);
+
+        // Prints error otherwise.
         } else {
             printf("Command not recognized.\n");
         }
