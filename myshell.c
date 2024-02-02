@@ -20,14 +20,15 @@ void execute_command(char *input) {
     }
 }
 int main() {
-    char input[1024];
+    char input[1024]; // Buffer for user input
 
+    // Processes input until EOF.
     while (1) {
         printf("MyShell> ");
         if (fgets(input, sizeof(input), stdin) == NULL) {
-            break;
+            break; // Exits on EOF
         }
-        execute_command(input);
+        execute_command(input); // Process the input
     }
 
     return 0;
