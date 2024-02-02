@@ -12,8 +12,10 @@ void execute_command(char *input)
     {
       token = strtok(NULL, delim); // Get next part (directory path)
       change_directory(token);
+    } else if (strcmp(token, "pwd") == 0)
+    { system("pwd");
     } else {
-      system("pwd");
+      printf("Command not found");
     }
   }
 }
