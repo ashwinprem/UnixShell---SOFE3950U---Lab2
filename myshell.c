@@ -6,7 +6,7 @@ void execute_command(char *input)
   char *token;
   char *delim = " \n";
   token = strtok (input, delim);
-
+	//check if there is input
   if (token != NULL) 
   {
     if (strcmp(token, "cd") == 0) 
