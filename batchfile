@@ -1,0 +1,6 @@
+pwd
+echo <comment>
+cd test
+pwd
+cd ..
+pwd
