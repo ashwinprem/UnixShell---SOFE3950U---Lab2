@@ -3,6 +3,12 @@
 #include <errno.h> // Error number definitions
 #include <ctype.h> // For isspace()
 
+#define RESET "\x1b[0m"
+#define ERROR "\x1b[31m"
+#define PURP "\x1b[35m"
+#define CYAN "\x1b[36m"
+
+
 void execute_command(char *input);
 void set_shell_environment_variable();
 void execute_external_command(char *input);
@@ -21,7 +27,8 @@ int main(int argc, char *argv[])
     char input[1024]; // Buffer for user input
     while (1)
     {
-        printf("MyShell> ");
+    	getcwd(input, sizeof(input));
+        printf(PURP "MyShell> " CYAN "%s>" RESET, input);
         if (fgets(input, sizeof(input), stdin) == NULL)
         {
             break; // Exit on EOF or error
@@ -46,15 +53,15 @@ void execute_command(char *input)
         system("clear");
     } else if (strcmp(token, "dir") == 0) {
         token = strtok(NULL, delim);
-        list_directory_contents(token); // This function needs to be implemented
+        list_directory_contents(token); 
     } else if (strcmp(token, "environ") == 0) {
-        list_environment_strings(); // This function needs to be implemented
+        list_environment_strings(); 
     } else if (strcmp(token, "echo") == 0) {
         echo_input(token + strlen(token) + 1); // Pass the rest of the input
     } else if (strcmp(token, "help") == 0) {
         system("more user_manual.txt"); // Assuming user_manual.txt exists
     } else if (strcmp(token, "pause") == 0) {
-        pause_shell(); // This function needs to be implemented
+        pause_shell(); 
     } else if (strcmp(token, "quit") == 0) {
         exit(0);
     } else {
@@ -69,7 +76,7 @@ void execute_external_command(char *input)
         // Child process
         char *envp[] = { NULL }; // Setup environment if necessary
         char *argv[] = { "/bin/sh", "-c", input, NULL };
-        if (execve("/bin/sh", argv, envp) == -1) {
+        if (execve("/bin/sh", argv, envp) == -1) { 
             perror("myshell");
             exit(EXIT_FAILURE);
         }
